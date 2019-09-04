@@ -1,0 +1,59 @@
+Volumes:
+1. backup  -- unnamed volumes
+    1.1 docker container run -d -v /var/log/apache2 app
+    1.2 in the Dockerfile VOLUME /var/lib/mysql
+    
+2. reuse and backup - named volume
+    2.1 $ docker container run -d -v proj-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=welcome mysql:5.7
+
+bind mounts:    
+3. choose the dir where the data gets saved, reuse and backup    
+    docker container run -d -v /tmp/logdata:/var/log/apache2 app
+    
+    
+------------------------------------------------------------------------------------------------------------
+Mounting a dir into container 
+=====/home/docker
+$ pwd
+/home/docker
+
+=====/home/docker
+$ git clone https://github.com/AdityaSP/htmlonly
+Cloning into 'htmlonly'...
+remote: Enumerating objects: 63, done.
+remote: Counting objects: 100% (63/63), done.
+remote: Compressing objects: 100% (52/52), done.
+remote: Total 63 (delta 9), reused 20 (delta 0), pack-reused 0
+Unpacking objects: 100% (63/63), done.
+
+=====/home/docker
+$ ls
+htmlonly
+
+=====/home/docker
+$ cd htmlonly/
+
+=====/home/docker/htmlonly
+$ ls
+mypage.html  readme.txt
+
+=====/home/docker/htmlonly
+$ docker container run -d -p 9595:80 -v $PWD:/var/www/localhost/htdocs app
+b07ec8e866ea3082929a5f33eea776501b21a9dbcdb1c8fbd5783431c5daa7ab
+
+=====/home/docker/htmlonly
+$ git pull
+remote: Enumerating objects: 5, done.
+remote: Counting objects: 100% (5/5), done.
+remote: Compressing objects: 100% (3/3), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), done.
+From https://github.com/AdityaSP/htmlonly
+   f7e121c..e6f762f  master     -> origin/master
+Updating f7e121c..e6f762f
+Fast-forward
+ mypage.html | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+=====/home/docker/htmlonly
+$
