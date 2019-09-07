@@ -10,5 +10,4 @@ RUN apt-get update -qq \
     && apt-get install docker-ce=18.03.1~ce-0~debian -y
 RUN usermod -aG docker jenkins
 RUN apt-get install -y git
-RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.15.0/bin/linux/amd64/kubectl
- && chmod +x kubectl && cp kubectl /bin
+RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.15.0/bin/linux/amd64/kubectl && chmod +x kubectl && cp kubectl /bin
